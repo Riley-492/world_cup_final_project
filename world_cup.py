@@ -1,29 +1,40 @@
 import sys
 import pygame
-from time import sleep
-from settings import Settings
+from background import Crowd
+TILE_SIZE = 64
+WINDOW_SIZE = 15 * TILE_SIZE
+pygame.init()
 
-Green = pygame.image.load("images/bg_green.png")
+screen = pygame.display.set_mode((1024, 640))  # pygame.FULLSCREEN)
+green = pygame.image.load("images/bg_green.png")
+
+green_rect = green.get_rect()
+screen_rect = screen.get_rect()
+
+num_tiles = screen_rect.width // green_rect.width
+
+crowd = Crowd()
+crowd.move((576, 0))
+
+def draw_background():
+    # screen is square so same number of tiles in row and col
+    for y in range(num_tiles):
+        for x in range(num_tiles):
+            screen.blit(green, (x * green_rect.width, y * green_rect.height))
 
 
-class WorldCup:
+clock = pygame.time.Clock()
+coordinate = (0, 0)
 
-    def __init__(self):
-        pygame.init()
+while True:
 
-        self.settings = Settings()
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+
+    draw_background()
+    pygame.display.flip()
+    clock.tick(60)
 
 
-    def run_game(self):
-        clock = pygame.time.Clock()
-        self.update_screen()
-        clock.tick(60)
 
-    def update_screen(self):
-        screen.fillGreen
-        pygame.display.flip()
-
-if __name__ == '__main__':
-    ai = WorldCup()
-    ai.run_game()
