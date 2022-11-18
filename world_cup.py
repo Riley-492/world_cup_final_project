@@ -1,40 +1,57 @@
-import sys
 import pygame
-from background import Crowd
-TILE_SIZE = 64
-WINDOW_SIZE = 15 * TILE_SIZE
-pygame.init()
+import sys
+from background import Background
 
-screen = pygame.display.set_mode((1024, 640))  # pygame.FULLSCREEN)
-green = pygame.image.load("images/bg_green.png")
+class WorldCup:
 
-green_rect = green.get_rect()
-screen_rect = screen.get_rect()
+    def __init__(self):
 
-num_tiles = screen_rect.width // green_rect.width
+        pygame.init()
+        #self.settings = Settings()
 
-crowd = Crowd()
-crowd.move((576, 0))
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen_rect = self.screen.get_rect()
+        self.background = Background(self.screen_rect.width, self.screen_rect.height)
+        self.game_objects = pygame.sprite.Group()
+        self.game_objects.add(self.background)
+        pygame.display.set_caption('World Cup')
+        self.bg_image = pygame.image.load("images/bg_green.png")
+        self.bg_image_rect = self.bg_image.get_rect()
+        self.num_tiles = self.screen_rect.width // self.bg_image_rect.width
+        self.fans = pygame.image.load("images/fans.png")
+        self.fans_rect = self.fans.get_rect()
 
-def draw_background():
-    # screen is square so same number of tiles in row and col
-    for y in range(num_tiles):
-        for x in range(num_tiles):
-            screen.blit(green, (x * green_rect.width, y * green_rect.height))
 
+    def run_game(self):
+        clock = pygame.time.Clock()
 
-clock = pygame.time.Clock()
-coordinate = (0, 0)
+        while True:
+            self.check_events()
+            self.update_screen()
+            clock.tick(60)
 
-while True:
+    def check_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self.check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self.check_keyup_events(event)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    def check_keydown_events(self, event):
+        if event.key == pygame.K_ESCAPE:
             sys.exit()
 
-    draw_background()
-    pygame.display.flip()
-    clock.tick(60)
+    def check_keyup_events(self, event):
+        if event.key == pygame.K_SPACE:
+            sys.exit()
+
+    def update_screen(self):
+        self.game_objects.draw(self.screen)
+        pygame.display.flip()
 
 
-
+if __name__ == '__main__':
+    ai = WorldCup()
+    ai.run_game()

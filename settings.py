@@ -1,8 +1,7 @@
 import pygame
-
+from background import Background
 
 class Settings:
 
     def __init__(self):
-        self.screen_width = 1024
-        self.screen_height = 640
+        self.color = self.set_color('green')
