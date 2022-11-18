@@ -29,10 +29,22 @@ class Background(Sprite):
             for x in range(0, 1200, 128):
                 self.image.blit(self.fans_up, (x, y))
 
+        self.left_side = pygame.image.load("images/left_side.png")
+        self.left_side_rect = self.left_side.get_rect()
+        self.left_side_width = width // self.left_side_rect.width
+        for y in range(312, 440, 128):
+            for x in range(0, 64, 64):
+                self.image.blit(self.left_side, (x, y))
+
+        self.right_side = pygame.image.load("images/right_side.png")
+        self.right_side_rect = self.right_side.get_rect()
+        self.right_side_width = width // self.right_side_rect.width
+        for y in range(312, 440, 128):
+            for x in range(1216, 1280, 64):
+                self.image.blit(self.right_side, (x, y))
+
         self.rect = self.image.get_rect()
 
-    #def blitme(self):
-    #    self.image.blit(self.image, self.rect)
 
     def draw(self):
         for y in range(0, 640, 64):
