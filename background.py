@@ -1,11 +1,12 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Background(Sprite):
 
     def __init__(self, width, height):
         super().__init__()
-        self.image = pygame.surface.Surface((width, height)) # screen_height, screen_width
+        self.image = pygame.surface.Surface((width, height))  # screen_height, screen_width
 
         self.bg_image = pygame.image.load("images/bg_green.png")
         self.bg_image_rect = self.bg_image.get_rect()
@@ -45,11 +46,8 @@ class Background(Sprite):
 
         self.rect = self.image.get_rect()
 
-
     def draw(self):
         for y in range(0, 640, 64):
             for x in range(0, 640, 64):
                 self.image.blit(pygame.image.load("images/bg_green.png"), (x, y))
                 self.image.blit(pygame.image.load("images/fans.png"), (x, y))
-
-
