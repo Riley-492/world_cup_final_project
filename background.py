@@ -19,6 +19,7 @@ class Background(Sprite):
 
         self.fans_width = width // self.fans_rect.width
 
+        # Received assistance from Noah Harding
         for y in range(self.fans_width):
             for x in range(self.fans_width):
                 self.image.blit(self.fans, (x*self.fans_rect.width, self.fans_rect.height))
@@ -30,6 +31,7 @@ class Background(Sprite):
             for x in range(0, 1200, 128):
                 self.image.blit(self.fans_up, (x, y))
 
+        # Received assistance from Sean Miller
         self.left_side = pygame.image.load("images/left_side.png")
         self.left_side_rect = self.left_side.get_rect()
         self.left_side_width = width // self.left_side_rect.width

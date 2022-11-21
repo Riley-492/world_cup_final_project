@@ -1,5 +1,6 @@
 import pygame
 
+
 class Ball:
     MAX_VEL = 5
     ball = pygame.image.load("images/ball_soccer2.png")
@@ -10,9 +11,6 @@ class Ball:
         self.x_vel = self.MAX_VEL
         self.y_vel = 0
 
-    def draw(self, win):
-
-
     def move(self):
         self.x += self.x_vel
         self.y += self.y_vel
@@ -22,4 +20,3 @@ class Ball:
         self.y = self.original_y
         self.y_vel = 0
         self.x_vel *= -1
-

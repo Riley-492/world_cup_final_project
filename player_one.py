@@ -22,11 +22,11 @@ class Car1(Sprite):
         """Update the ship's position based on movement flags."""
         if self.moving_up and self.rect.top > 128:
             self.y -= 3
-        if self.moving_down and self.rect.bottom < 1000:
+        if self.moving_down and self.rect.bottom < 656:
             self.y += 3
-        if self.moving_right and self.rect.left > 0:
+        if self.moving_right and self.rect.right < 1280:
             self.x += 3
-        if self.moving_left and self.rect.right < 1280:
+        if self.moving_left and self.rect.left > 0:
             self.x -= 3
 
         # Update rect object from self.y.

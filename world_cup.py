@@ -30,6 +30,7 @@ class WorldCup:
             self.update_screen()
             clock.tick(60)
 
+
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,6 +42,7 @@ class WorldCup:
 
     def update_screen(self):
         self.game_objects.draw(self.screen)
+
         pygame.display.flip()
 
     def check_keydown_events(self, event):
