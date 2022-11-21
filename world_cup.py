@@ -3,6 +3,8 @@ import sys
 from background import Background
 from player_one import Car1
 from player_two import Car2
+from ball import Ball
+
 
 class WorldCup:
 
@@ -15,8 +17,11 @@ class WorldCup:
         self.background = Background(self.screen_rect.width, self.screen_rect.height)
         self.car1 = Car1((128, 378))
         self.car2 = Car2((1088, 378))
+        self.ball = Ball((633, 375))
         self.game_objects = pygame.sprite.Group()
-        self.game_objects.add(self.background, self.car1, self.car2)
+        if pygame.sprite.collide_rect(self.car1, self.ball):
+            print("boink") # make this a method and check for events and have it 'bounce off'
+        self.game_objects.add(self.background, self.car1, self.car2, self.ball)
 
         pygame.display.set_caption('World Cup')
 
@@ -27,6 +32,7 @@ class WorldCup:
             self.check_events()
             self.car1.update()
             self.car2.update()
+            self.ball.update()
             self.update_screen()
             clock.tick(60)
 

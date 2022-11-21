@@ -1,22 +1,22 @@
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ball:
+class Ball(Sprite):
     MAX_VEL = 5
-    ball = pygame.image.load("images/ball_soccer2.png")
 
-    def __init__(self, x, y):
-        self.x = self.original_x = x
-        self.y = self.original_y = y
+    def __init__(self, position):
+        super().__init__()
+        self.image = pygame.image.load("images/ball.png")
+        self.rect = self.image.get_rect()
+        self.rect.center = position
+        self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
         self.x_vel = self.MAX_VEL
         self.y_vel = 0
 
-    def move(self):
+    def update(self):
         self.x += self.x_vel
         self.y += self.y_vel
 
-    def reset(self):
-        self.x = self.original_x
-        self.y = self.original_y
-        self.y_vel = 0
-        self.x_vel *= -1
+    def draw(self):
+        self.image.blit(self.image, self.rect)
