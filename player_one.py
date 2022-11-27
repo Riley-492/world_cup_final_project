@@ -1,4 +1,5 @@
 import pygame
+from player_two import Car2
 from pygame.sprite import Sprite
 
 class Car1(Sprite):
@@ -21,17 +22,19 @@ class Car1(Sprite):
     def update(self):
         """Update the ship's position based on movement flags."""
         if self.moving_up and self.rect.top > 128:
-            self.y -= 3
+            self.y -= 4
         if self.moving_down and self.rect.bottom < 656:
-            self.y += 3
+            self.y += 4
         if self.moving_right and self.rect.right < 1280:
-            self.x += 3
+            self.x += 4
         if self.moving_left and self.rect.left > 0:
-            self.x -= 3
+            self.x -= 4
 
         # Update rect object from self.y.
         self.rect.y = self.y
         self.rect.x = self.x
+
+
 
     def draw(self):
         """Draw the ship at its current location."""

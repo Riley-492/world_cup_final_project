@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 from background import Background
 from player_one import Car1
 from player_two import Car2
@@ -17,10 +18,8 @@ class WorldCup:
         self.background = Background(self.screen_rect.width, self.screen_rect.height)
         self.car1 = Car1((128, 378))
         self.car2 = Car2((1088, 378))
-        self.ball = Ball((633, 375))
+        self.ball = Ball((633, 375), 10, (random.random(), random.random()))
         self.game_objects = pygame.sprite.Group()
-        if pygame.sprite.collide_rect(self.car1, self.ball):
-            print("boink") # make this a method and check for events and have it 'bounce off'
         self.game_objects.add(self.background, self.car1, self.car2, self.ball)
 
         pygame.display.set_caption('World Cup')
@@ -32,10 +31,9 @@ class WorldCup:
             self.check_events()
             self.car1.update()
             self.car2.update()
-            self.ball.update()
+            self.ball.update(self.car1, self.car2)
             self.update_screen()
             clock.tick(60)
-
 
     def check_events(self):
         for event in pygame.event.get():
@@ -43,6 +41,7 @@ class WorldCup:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self.check_keydown_events(event)
+                # collison = pygame.sprite.collide_rect(self.car1, self.car2)
             elif event.type == pygame.KEYUP:
                 self.check_keyup_events(event)
 
@@ -70,6 +69,7 @@ class WorldCup:
             self.car2.moving_right = True
         elif event.key == pygame.K_a:
             self.car2.moving_left = True
+        # elif collison:
 
     def check_keyup_events(self, event):
         if event.key == pygame.K_SPACE:
