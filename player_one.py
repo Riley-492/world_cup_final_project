@@ -1,6 +1,6 @@
 import pygame
-from player_two import Car2
 from pygame.sprite import Sprite
+
 
 class Car1(Sprite):
     """A class to manage the ship."""
@@ -33,8 +33,6 @@ class Car1(Sprite):
         # Update rect object from self.y.
         self.rect.y = self.y
         self.rect.x = self.x
-
-
 
     def draw(self):
         """Draw the ship at its current location."""
