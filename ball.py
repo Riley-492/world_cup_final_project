@@ -39,13 +39,15 @@ class Ball(Sprite):
             self.score1 += 1
             time.sleep(1)
             self.velocity[0] *= -1
-            self.rect.left = 96
+            self.rect.left = 633
+            self.rect.top = 375
 
         if self.rect.right >= 1184 and self.rect.bottom <= 440 and self.rect.top >= 280:
             self.score2 += 1
             time.sleep(1)
             self.velocity[0] *= -1
-            self.rect.right = 1184
+            self.rect.right = 633
+            self.rect.top = 375
 
         # Do this to make the cars not be able to go through each other, setting movement to false...
         for car in [car1, car2]:

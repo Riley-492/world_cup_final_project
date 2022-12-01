@@ -29,6 +29,7 @@ class Car(Sprite):
         if other_car.rect.collidepoint(self.rect.midbottom):
             self.moving_down = False
 
+
         """Update the ship's position based on movement flags."""
         if self.moving_up and self.rect.top > 128:
             self.y -= 5
