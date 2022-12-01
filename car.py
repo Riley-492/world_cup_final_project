@@ -2,12 +2,12 @@ import pygame
 from pygame.sprite import Sprite
 
 
-class Car1(Sprite):
+class Car(Sprite):
     """A class to manage the ship."""
 
-    def __init__(self, position):
+    def __init__(self, position, image):
         super().__init__()
-        self.image = pygame.image.load('images/car_black.png')
+        self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
         self.rect.center = position
         self.x = float(self.rect.x)
@@ -19,7 +19,16 @@ class Car1(Sprite):
         self.moving_right = False
         self.moving_left = False
 
-    def update(self):
+    def update(self, other_car):
+        if other_car.rect.collidepoint(self.rect.midright):
+            self.moving_right = False
+        if other_car.rect.collidepoint(self.rect.midleft):
+            self.moving_left = False
+        if other_car.rect.collidepoint(self.rect.midtop):
+            self.moving_up = False
+        if other_car.rect.collidepoint(self.rect.midbottom):
+            self.moving_down = False
+
         """Update the ship's position based on movement flags."""
         if self.moving_up and self.rect.top > 128:
             self.y -= 5

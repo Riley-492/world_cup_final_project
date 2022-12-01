@@ -47,9 +47,3 @@ class Background(Sprite):
                 self.image.blit(self.right_side, (x, y))
 
         self.rect = self.image.get_rect()
-
-    def draw(self):
-        for y in range(0, 640, 64):
-            for x in range(0, 640, 64):
-                self.image.blit(pygame.image.load("images/bg_green.png"), (x, y))
-                self.image.blit(pygame.image.load("images/fans.png"), (x, y))

@@ -1,10 +1,15 @@
 import pygame
 import sys
 from background import Background
-#from scoreboard import Scoreboard
-from player_one import Car1
-from player_two import Car2
+from car import Car
 from ball import Ball
+from pygame import mixer
+
+mixer.init()
+# music from bensound.com
+mixer.music.load('background_music.mp3')
+mixer.music.set_volume(0.3)
+mixer.music.play()
 
 
 class WorldCup:
@@ -16,9 +21,9 @@ class WorldCup:
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.screen_rect = self.screen.get_rect()
         self.background = Background(self.screen_rect.width, self.screen_rect.height)
-        self.car1 = Car1((136, 378))
-        self.car2 = Car2((1088, 378))
-        self.ball = Ball((633, 375), [2, 3])
+        self.car1 = Car((136, 378), 'images/car_black.png')
+        self.car2 = Car((1088, 378), 'images/car_blue.png')
+        self.ball = Ball((633, 375), [1, 1.5])
         self.game_objects = pygame.sprite.Group()
         self.game_objects.add(self.background, self.car1, self.car2, self.ball)
         pygame.display.set_caption('World Cup')
@@ -30,8 +35,8 @@ class WorldCup:
 
         while True:
             self.check_events()
-            self.car1.update()
-            self.car2.update()
+            self.car1.update(self.car2)
+            self.car2.update(self.car1)
             self.ball.update(self.car1, self.car2)
             self.ball.update_score()
             self.update_screen()
