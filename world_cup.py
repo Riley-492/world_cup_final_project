@@ -68,42 +68,41 @@ class WorldCup:
         if event.key == pygame.K_ESCAPE:
             sys.exit()
         elif event.key == pygame.K_UP:
-            self.car1.moving_up = True
-        elif event.key == pygame.K_DOWN:
-            self.car1.moving_down = True
-        elif event.key == pygame.K_RIGHT:
-            self.car1.moving_right = True
-        elif event.key == pygame.K_LEFT:
-            self.car1.moving_left = True
-        elif event.key == pygame.K_w:
             self.car2.moving_up = True
-        elif event.key == pygame.K_s:
+        elif event.key == pygame.K_DOWN:
             self.car2.moving_down = True
-        elif event.key == pygame.K_d:
+        elif event.key == pygame.K_RIGHT:
             self.car2.moving_right = True
-        elif event.key == pygame.K_a:
+        elif event.key == pygame.K_LEFT:
             self.car2.moving_left = True
+        elif event.key == pygame.K_w:
+            self.car1.moving_up = True
+        elif event.key == pygame.K_s:
+            self.car1.moving_down = True
+        elif event.key == pygame.K_d:
+            self.car1.moving_right = True
+        elif event.key == pygame.K_a:
+            self.car1.moving_left = True
 
     def check_keyup_events(self, event):
         if event.key == pygame.K_SPACE:
             sys.exit()
         elif event.key == pygame.K_UP:
-            self.car1.moving_up = False
-        elif event.key == pygame.K_DOWN:
-            self.car1.moving_down = False
-        elif event.key == pygame.K_RIGHT:
-            self.car1.moving_right = False
-        elif event.key == pygame.K_LEFT:
-            self.car1.moving_left = False
-        elif event.key == pygame.K_w:
             self.car2.moving_up = False
-        elif event.key == pygame.K_s:
+        elif event.key == pygame.K_DOWN:
             self.car2.moving_down = False
-        elif event.key == pygame.K_d:
+        elif event.key == pygame.K_RIGHT:
             self.car2.moving_right = False
-        elif event.key == pygame.K_a:
+        elif event.key == pygame.K_LEFT:
             self.car2.moving_left = False
-
+        elif event.key == pygame.K_w:
+            self.car1.moving_up = False
+        elif event.key == pygame.K_s:
+            self.car1.moving_down = False
+        elif event.key == pygame.K_d:
+            self.car1.moving_right = False
+        elif event.key == pygame.K_a:
+            self.car1.moving_left = False
 
 
 if __name__ == '__main__':

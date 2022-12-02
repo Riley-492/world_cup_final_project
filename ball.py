@@ -27,29 +27,29 @@ class Ball(Sprite):
         if self.rect.top <= 128:
             self.velocity[1] *= -1
             self.rect.top = 128
-        if self.rect.left <= 0:
+        if self.rect.left <= 96:
             self.velocity[0] *= -1
-            self.rect.left = 0
-        if self.rect.right >= 1280:
+            self.rect.left = 96
+        if self.rect.right >= 1184:
             self.velocity[0] *= -1
-            self.rect.right = 1280
+            self.rect.right = 1184
 
         # Score!!!
-        if self.rect.left <= 96 and self.rect.bottom <= 440 and self.rect.top >= 280:
+        if self.rect.left <= 97 and self.rect.bottom <= 440 and self.rect.top >= 280:
             self.score1 += 1
-            time.sleep(1)
+            time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.left = 633
             self.rect.top = 375
 
         if self.rect.right >= 1184 and self.rect.bottom <= 440 and self.rect.top >= 280:
             self.score2 += 1
-            time.sleep(1)
+            time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.right = 633
             self.rect.top = 375
 
-        # Do this to make the cars not be able to go through each other, setting movement to false...
+        # Ball collision with cars(players)
         for car in [car1, car2]:
             if car.rect.collidepoint(self.rect.midbottom):
                 self.velocity[1] *= -1
