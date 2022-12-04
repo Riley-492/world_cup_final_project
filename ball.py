@@ -36,18 +36,20 @@ class Ball(Sprite):
 
         # Score!!!
         if self.rect.left <= 97 and self.rect.bottom <= 440 and self.rect.top >= 280:
-            self.score1 += 1
+            self.score2 += 1
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.left = 633
             self.rect.top = 375
+            self.car1 = (140, 378)
 
         if self.rect.right >= 1184 and self.rect.bottom <= 440 and self.rect.top >= 280:
-            self.score2 += 1
+            self.score1 += 1
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.right = 633
             self.rect.top = 375
+            self.car1 = (140, 378)
 
         # Ball collision with cars(players)
         for car in [car1, car2]:

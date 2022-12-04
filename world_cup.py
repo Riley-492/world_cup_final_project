@@ -3,6 +3,7 @@ import sys
 from background import Background
 from car import Car
 from ball import Ball
+from button import Button
 from pygame import mixer
 pygame.init()
 mixer.init()
@@ -20,7 +21,7 @@ class WorldCup:
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.screen_rect = self.screen.get_rect()
         self.background = Background(self.screen_rect.width, self.screen_rect.height)
-        self.car1 = Car((136, 378), 'images/car_black.png')
+        self.car1 = Car((140, 378), 'images/car_black.png')
         self.car2 = Car((1088, 378), 'images/car_blue.png')
         self.ball = Ball((633, 375), [2, 3])
         self.game_objects = pygame.sprite.Group()
@@ -28,12 +29,20 @@ class WorldCup:
         pygame.display.set_caption('World Cup')
         self.score1 = 0
         self.score2 = 0
+        self.button = Button('Start')
+        self.game_active = True  
 
     def draw_clock(self, seconds):
         # Clock
         output_string = f"Time: {seconds}"
         text = font.render(output_string, True, [30, 30, 30])
         self.screen.blit(text, [10, 16])
+        if seconds == 0:
+            self.game_active = False
+        if seconds == 90:
+            self.game_active = False
+            self.score1 = 0
+            self.score2 = 0
 
     def run_game(self):
         clock = pygame.time.Clock()
@@ -41,15 +50,19 @@ class WorldCup:
 
         while True:
             self.check_events()
-            self.car1.update(self.car2)
-            self.car2.update(self.car1)
-            self.ball.update(self.car1, self.car2)
-            self.ball.update_score()
+            if not self.game_active:
+                self.button.draw_button()
 
+            if self.game_active:
+                self.car1.update(self.car2)
+                self.car2.update(self.car1)
+                self.ball.update(self.car1, self.car2)
+                self.ball.update_score()
             # Drawing the screen and its objects
-            self.game_objects.draw(self.screen)
-            self.draw_clock(frame_index//60)
-            self.ball.update_score()
+                self.game_objects.draw(self.screen)
+                self.draw_clock(frame_index//60)
+                self.ball.update_score()
+
             pygame.display.flip()
 
             clock.tick(60)
@@ -63,6 +76,17 @@ class WorldCup:
                 self.check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self.check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self, mouse_pos):
+        # Start a new game when the player clicks play
+        self.button_clicked = self.button.rect.collidepoint(mouse_pos)
+        if self.button_clicked and not self.game_active:
+            self.game_active = True
+            self.score1 = 0
+            self.score2 = 0
 
     def check_keydown_events(self, event):
         if event.key == pygame.K_ESCAPE:

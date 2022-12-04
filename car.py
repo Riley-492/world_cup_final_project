@@ -3,8 +3,6 @@ from pygame.sprite import Sprite
 
 
 class Car(Sprite):
-    """A class to manage the ship."""
-
     def __init__(self, position, image):
         super().__init__()
         self.image = pygame.image.load(image)
