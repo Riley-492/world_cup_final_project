@@ -1,6 +1,11 @@
 import pygame
 from pygame.sprite import Sprite
 import time
+from pygame import mixer
+mixer.init()
+# music from bensound.com
+mixer.music.load('goal.mp3')
+mixer.music.set_volume(1)
 
 
 class Ball(Sprite):
@@ -37,6 +42,7 @@ class Ball(Sprite):
         # Score!!!
         if self.rect.left <= 97 and self.rect.bottom <= 440 and self.rect.top >= 280:
             self.score2 += 1
+            #mixer.music.play()
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.left = 633
@@ -46,6 +52,7 @@ class Ball(Sprite):
 
         if self.rect.right >= 1184 and self.rect.bottom <= 440 and self.rect.top >= 280:
             self.score1 += 1
+            #mixer.music.play()
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.right = 633

@@ -12,7 +12,7 @@ class Button(Sprite):
         self.height = 50
         self.button_color = (0, 230, 0)
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont('Times', 46)
+        self.font = pygame.font.SysFont('Times', 42)
         self.rect = pygame.Rect(0, 0, self.width, self.height)
         self.rect.center = self.screen_rect.center
         self._prep_msg(msg)
