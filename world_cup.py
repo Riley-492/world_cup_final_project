@@ -21,7 +21,7 @@ class WorldCup:
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.screen_rect = self.screen.get_rect()
         self.background = Background(self.screen_rect.width, self.screen_rect.height)
-        self.car1 = Car((140, 378), 'images/car_black.png')
+        self.car1 = Car((150, 378), 'images/car_black.png')
         self.car2 = Car((1088, 378), 'images/car_blue.png')
         self.ball = Ball((633, 375), [2, 3])
         self.game_objects = pygame.sprite.Group()
@@ -41,8 +41,8 @@ class WorldCup:
             self.game_active = False
         if seconds == 90:
             self.game_active = False
-            self.score1 = 0
-            self.score2 = 0
+            self.score1 -= self.score1
+            self.score2 -= self.score2
 
     def run_game(self):
         clock = pygame.time.Clock()
@@ -50,6 +50,7 @@ class WorldCup:
 
         while True:
             self.check_events()
+
             if not self.game_active:
                 self.button.draw_button()
 
@@ -85,8 +86,8 @@ class WorldCup:
         self.button_clicked = self.button.rect.collidepoint(mouse_pos)
         if self.button_clicked and not self.game_active:
             self.game_active = True
-            self.score1 = 0
-            self.score2 = 0
+            self.score1 -= self.score1
+            self.score2 -= self.score2
 
     def check_keydown_events(self, event):
         if event.key == pygame.K_ESCAPE:
