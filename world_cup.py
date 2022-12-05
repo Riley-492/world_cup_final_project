@@ -31,7 +31,6 @@ class WorldCup:
         self.button = Button('Start')
         self.game_active = True
 
-
     def draw_clock(self, seconds):
         # Clock
         output_string = f"Time: {seconds}"
@@ -56,7 +55,6 @@ class WorldCup:
                 mixer.music.play()
 
             if self.game_active:
-
                 self.car1.update(self.car2)
                 self.car2.update(self.car1)
                 self.ball.update(self.car1, self.car2)
