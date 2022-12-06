@@ -2,10 +2,10 @@ import pygame
 from pygame.sprite import Sprite
 import time
 from pygame import mixer
+
 mixer.init()
-# music from bensound.com
-mixer.music.load('goal.mp3')
-mixer.music.set_volume(1)
+goal = pygame.mixer.Sound('goal.mp3')
+goal.set_volume(1)
 
 
 class Ball(Sprite):
@@ -23,7 +23,6 @@ class Ball(Sprite):
         self.score2 = 0
 
     def update(self, car1, car2):
-
         self.rect.x = self.rect.x + self.velocity[0]
         self.rect.y = self.rect.y + self.velocity[1]
         if self.rect.bottom >= 656:
@@ -40,9 +39,9 @@ class Ball(Sprite):
             self.rect.right = 1184
 
         # Score!!!
-        if self.rect.left <= 97 and self.rect.bottom <= 440 and self.rect.top >= 280:
+        if self.rect.left <= 97 and self.rect.bottom <= 488 and self.rect.top >= 296:
             self.score2 += 1
-            #mixer.music.play()
+            goal.play()
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.left = 633
@@ -50,9 +49,9 @@ class Ball(Sprite):
             self.car1 = (140, 378)
             self.car2 = (1088, 378)
 
-        if self.rect.right >= 1184 and self.rect.bottom <= 440 and self.rect.top >= 280:
+        if self.rect.right >= 1184 and self.rect.bottom <= 488 and self.rect.top >= 296:
             self.score1 += 1
-            #mixer.music.play()
+            goal.play()
             time.sleep(1.5)
             self.velocity[0] *= -1
             self.rect.right = 633
@@ -79,6 +78,13 @@ class Ball(Sprite):
         font = pygame.font.SysFont("Times", 46)
         msg = font.render(f"{self.score1} - Score -  {self.score2}", True, [30, 30, 30])
         self.screen.blit(msg, (517, 16))
+
+    def win_msg(self):
+        if self.score1 <= self.score2:
+            font = pygame.font.SysFont("Times", 60)
+            msg = font.render(f"Yellow Player Won by {self.score1} - {self.score2}", True, [30, 30, 30])
+            self.screen.blit(msg, (300, 200))
+
 
     def draw(self):
         self.image.blit(self.image, self.rect)

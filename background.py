@@ -25,7 +25,6 @@ class Background(Sprite):
             for x in range(1184, 1194, 64):
                 self.image.blit(self.white_line, (x, y))
 
-
         # Top fans
         self.fans = pygame.image.load("images/fans.png")
         self.fans_rect = self.fans.get_rect()

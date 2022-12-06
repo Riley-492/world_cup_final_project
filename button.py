@@ -10,7 +10,7 @@ class Button(Sprite):
         self.screen_rect = self.screen.get_rect()
         self.width = 200
         self.height = 50
-        self.button_color = (0, 230, 0)
+        self.button_color = (0, 200, 0)
         self.text_color = (30, 30, 30)
         self.font = pygame.font.SysFont('Times', 42)
         self.rect = pygame.Rect(0, 0, self.width, self.height)
