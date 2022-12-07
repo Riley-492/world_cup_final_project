@@ -68,9 +68,6 @@ class WorldCup:
                 self.draw_clock(self.game_time)
                 self.ball.update_score()
 
-                if self.game_time >= 85:
-                    self.ball.win_msg()
-
                 if self.game_time == 90:
                     self.game_time = 0
                     self.frame_index = 0

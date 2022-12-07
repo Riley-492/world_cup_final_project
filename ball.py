@@ -87,15 +87,5 @@ class Ball(Sprite):
             msg = font.render(f"Who will win?", True, [30, 30, 30])
             self.screen.blit(msg, (800, 16))
 
-    def win_msg(self):
-        if self.score1 <= self.score2:
-            font = pygame.font.SysFont("Times", 46)
-            msg = font.render(f"Yellow is going to win!", True, [30, 30, 30])
-            self.screen.blit(msg, (775, 16))
-        if self.score1 >= self.score2:
-            font = pygame.font.SysFont("Times", 46)
-            msg = font.render(f"Blue is going to win!", True, [30, 30, 30])
-            self.screen.blit(msg, (775, 16))
-
     def draw(self):
         self.image.blit(self.image, self.rect)

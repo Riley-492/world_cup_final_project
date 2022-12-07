@@ -1,5 +1,6 @@
 # World Cup
-    EW200 Final project 
+   EW200 Final project 
+   MIDN Riley Haugen
 
 ## Instructions to play
 
