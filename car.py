@@ -27,7 +27,6 @@ class Car(Sprite):
         if other_car.rect.collidepoint(self.rect.midbottom):
             self.moving_down = False
 
-        # Received assistance from Rachel Huang
         if self.moving_up and self.rect.top > 128:
             self.y -= 5
         if self.moving_down and self.rect.bottom < 656:
@@ -37,7 +36,6 @@ class Car(Sprite):
         if self.moving_left and self.rect.left > 0:
             self.x -= 5
 
-        # Update rect object from self.y.
         self.rect.y = self.y
         self.rect.x = self.x
 

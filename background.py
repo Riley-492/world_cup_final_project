@@ -6,7 +6,7 @@ class Background(Sprite):
 
     def __init__(self, width, height):
         super().__init__()
-        self.image = pygame.surface.Surface((width, height))  # screen_height, screen_width
+        self.image = pygame.surface.Surface((width, height))
         # Green Field
         self.bg_image = pygame.image.load("images/bg_green.png")
         self.bg_image_rect = self.bg_image.get_rect()
@@ -29,7 +29,6 @@ class Background(Sprite):
         self.fans = pygame.image.load("images/fans.png")
         self.fans_rect = self.fans.get_rect()
         self.fans_width = width // self.fans_rect.width
-        # Received assistance from Noah Harding
         for y in range(self.fans_width):
             for x in range(self.fans_width):
                 self.image.blit(self.fans, (x*self.fans_rect.width, self.fans_rect.height))
@@ -43,7 +42,6 @@ class Background(Sprite):
                 self.image.blit(self.fans_up, (x, y))
 
         # Goal Left Side
-        # Received assistance from Sean Miller
         self.left_side = pygame.image.load("images/left_side.png")
         self.left_side_rect = self.left_side.get_rect()
         self.left_side_width = width // self.left_side_rect.width
