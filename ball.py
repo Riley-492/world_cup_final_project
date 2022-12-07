@@ -46,8 +46,6 @@ class Ball(Sprite):
             self.velocity[0] *= -1
             self.rect.left = 633
             self.rect.top = 375
-            self.car1 = (140, 378)
-            self.car2 = (1088, 378)
 
         if self.rect.right >= 1184 and self.rect.bottom <= 488 and self.rect.top >= 296:
             self.score1 += 1
@@ -56,8 +54,6 @@ class Ball(Sprite):
             self.velocity[0] *= -1
             self.rect.right = 633
             self.rect.top = 375
-            self.car1 = (140, 378)
-            self.car2 = (1088, 378)
 
         # Ball collision with cars(players)
         for car in [car1, car2]:
@@ -86,12 +82,20 @@ class Ball(Sprite):
         msg = font.render(f"{self.score1} - Score -  {self.score2}", True, [30, 30, 30])
         self.screen.blit(msg, (517, 16))
 
+        if self.score1 == self.score2:
+            font = pygame.font.SysFont("Times", 46)
+            msg = font.render(f"Who will win?", True, [30, 30, 30])
+            self.screen.blit(msg, (800, 16))
 
     def win_msg(self):
         if self.score1 <= self.score2:
-            font = pygame.font.SysFont("Times", 60)
-            msg = font.render(f"Yellow Player Won by {self.score1} - {self.score2}", True, [30, 30, 30])
-            self.screen.blit(msg, (300, 200))
+            font = pygame.font.SysFont("Times", 46)
+            msg = font.render(f"Yellow is going to win!", True, [30, 30, 30])
+            self.screen.blit(msg, (775, 16))
+        if self.score1 >= self.score2:
+            font = pygame.font.SysFont("Times", 46)
+            msg = font.render(f"Blue is going to win!", True, [30, 30, 30])
+            self.screen.blit(msg, (775, 16))
 
     def draw(self):
         self.image.blit(self.image, self.rect)

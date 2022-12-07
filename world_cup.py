@@ -51,8 +51,9 @@ class WorldCup:
             if not self.game_active:
                 self.game_objects.draw(self.screen)
                 self.draw_clock(self.game_time)
-                self.ball.new_game_score()
                 self.button.draw_button()
+                self.ball.update_score()
+                self.ball.new_game_score()
                 mixer.music.play()
 
             if self.game_active:
@@ -67,11 +68,13 @@ class WorldCup:
                 self.draw_clock(self.game_time)
                 self.ball.update_score()
 
+                if self.game_time >= 85:
+                    self.ball.win_msg()
+
                 if self.game_time == 90:
-                    self.game_active = False
                     self.game_time = 0
                     self.frame_index = 0
-                    #self.ball.win_msg()
+                    self.game_active = False
 
             pygame.display.flip()
             clock.tick(60)
@@ -87,7 +90,6 @@ class WorldCup:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 self._check_play_button(mouse_pos)
-
 
     def _check_play_button(self, mouse_pos):
         # Start a new game when the player clicks play
