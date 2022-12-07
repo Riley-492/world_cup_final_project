@@ -10,7 +10,7 @@ pygame.init()
 mixer.init()
 # music from bensound.com
 mixer.music.load('background_music.mp3')
-mixer.music.set_volume(0.3)
+mixer.music.set_volume(0.4)
 
 font = pygame.font.SysFont("Times", 46)
 
@@ -27,9 +27,9 @@ class WorldCup:
         self.game_objects = pygame.sprite.Group()
         self.game_objects.add(self.background, self.car1, self.car2, self.ball)
         pygame.display.set_caption('World Cup')
+        self.game_time = 0
         self.score1 = 0
         self.score2 = 0
-        self.game_time = 0
         self.button = Button('Start')
         self.game_active = False
 
@@ -51,9 +51,8 @@ class WorldCup:
             if not self.game_active:
                 self.game_objects.draw(self.screen)
                 self.draw_clock(self.game_time)
-                self.ball.update_score()
+                self.ball.new_game_score()
                 self.button.draw_button()
-
                 mixer.music.play()
 
             if self.game_active:
@@ -72,7 +71,7 @@ class WorldCup:
                     self.game_active = False
                     self.game_time = 0
                     self.frame_index = 0
-                    self.ball.win_msg()
+                    #self.ball.win_msg()
 
             pygame.display.flip()
             clock.tick(60)
@@ -88,6 +87,7 @@ class WorldCup:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 self._check_play_button(mouse_pos)
+
 
     def _check_play_button(self, mouse_pos):
         # Start a new game when the player clicks play

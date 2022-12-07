@@ -5,7 +5,7 @@ from pygame import mixer
 
 mixer.init()
 goal = pygame.mixer.Sound('goal.mp3')
-goal.set_volume(1)
+goal.set_volume(0.2)
 
 
 class Ball(Sprite):
@@ -79,12 +79,19 @@ class Ball(Sprite):
         msg = font.render(f"{self.score1} - Score -  {self.score2}", True, [30, 30, 30])
         self.screen.blit(msg, (517, 16))
 
+    def new_game_score(self):
+        self.score1 = 0
+        self.score2 = 0
+        font = pygame.font.SysFont("Times", 46)
+        msg = font.render(f"{self.score1} - Score -  {self.score2}", True, [30, 30, 30])
+        self.screen.blit(msg, (517, 16))
+
+
     def win_msg(self):
         if self.score1 <= self.score2:
             font = pygame.font.SysFont("Times", 60)
             msg = font.render(f"Yellow Player Won by {self.score1} - {self.score2}", True, [30, 30, 30])
             self.screen.blit(msg, (300, 200))
-
 
     def draw(self):
         self.image.blit(self.image, self.rect)
